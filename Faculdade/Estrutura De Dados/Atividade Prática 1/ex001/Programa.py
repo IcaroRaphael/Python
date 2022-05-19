@@ -51,9 +51,8 @@ class Pilha:
             print("A pilha está vazia!")
         else:
             print("Ordem inversa: ", end="")
-            for valor in range(self.capacidade, 0, -1):
-                print(f"{pilha.verTopo()} ", end="")
-                pilha.desempilhar()
+            for valor in range(self.capacidade-1, -1, -1):
+                print(f"{pilha.valores[valor]} ", end="")
 
 
 quant = int(input('Quantos números serão lidos? R:'))
