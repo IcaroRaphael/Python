@@ -59,7 +59,7 @@ fila = FilaPrioridade(quant)
 for y in range(len(fila.valores)):
     fila.valores[y] = 0
 
-# INSERINDO VALORES NA FILA
+# MENU
 while True:
     print("-=-" * 15)
     print("OPERAÇÕES DISPONÍVEIS:")
