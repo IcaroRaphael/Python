@@ -51,7 +51,7 @@ class Fila:
 
 # FUNÇÃO LINHA
 def linha():
-    print("-=-"*20)
+    print("\033[1;34m-=-\033[m"*20)
 
 
 # FUNÇÃO MENSAGEM DE INVALIDEZ
