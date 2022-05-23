@@ -61,7 +61,25 @@ class Pilha:
             return False
 
 
-quant = int(input('Quantos carros serão lidos? R:'))
+# FUNÇÃO LINHA
+def linha():
+    print("\033[1;34m-=-\033[m"*20)
+
+
+# FUNÇÃO MENSAGEM DE INVALIDEZ
+def comandoInvalido():
+    print("\033[1;31mOpção inválida. Tente novamente!\033[m")
+
+
+print("* PILHA *")
+# Definindo tamanho da pilha
+while True:
+    linha()
+    try:
+        quant = int(input('Quantos carros serão lidos? R:'))
+        break
+    except:
+        comandoInvalido()
 pilha = Pilha(quant)
 
 # Inserindo valores a pilha
@@ -69,12 +87,22 @@ for valor in range(quant):
     if pilha.pilhaCheia():
         print("A pilha está cheia!")
     else:
-        placa = int(input(f"{valor+1}º placa: "))
+        while True:
+            try:
+                placa = int(input(f"{valor+1}º placa: "))
+                break
+            except:
+                comandoInvalido()
         pilha.empilhar(placa)
 
-print("-=-"*15)
-placa = int(input("Insira a placa do carro escolhido: "))
-print("-=-"*15)
+linha()
+while True:
+    try:
+        placa = int(input("Insira a placa do carro escolhido: "))
+        break
+    except:
+        comandoInvalido()
+linha()
 
 cont = pilha.capacidade - 1
 if pilha.verificadorPlaca(placa):

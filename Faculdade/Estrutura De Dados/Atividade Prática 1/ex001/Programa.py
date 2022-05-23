@@ -55,16 +55,40 @@ class Pilha:
                 print(f"{pilha.valores[valor]} ", end="")
 
 
-quant = int(input('Quantos números serão lidos? R:'))
+# FUNÇÃO LINHA
+def linha():
+    print("\033[1;34m-=-\033[m"*20)
+
+
+# FUNÇÃO MENSAGEM DE INVALIDEZ
+def comandoInvalido():
+    print("\033[1;31mOpção inválida. Tente novamente!\033[m")
+
+
+print("* PILHA *")
+# Definindo tamanho da pilha
+while True:
+    linha()
+    try:
+        quant = int(input('Insira o tamanho da pilha: '))
+        break
+    except:
+        comandoInvalido()
 pilha = Pilha(quant)
 
 # Inserindo valores a pilha
+linha()
 for valor in range(quant):
     if pilha.pilhaCheia():
         print("A pilha está cheia!")
     else:
-        numero = int(input(f"{valor+1}º número: "))
+        while True:
+            try:
+                numero = int(input(f"{valor+1}º número: "))
+                break
+            except:
+                comandoInvalido()
         pilha.empilhar(numero)
 
-print("-=-"*15)
+linha()
 pilha.mostrarInversa()
