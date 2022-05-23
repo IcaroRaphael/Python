@@ -1,5 +1,5 @@
 """
-6- Construa uma Lista Sequencial utilizando a linguagem Python com as seguintes operações:
+6 - Construa uma Lista Sequencial utilizando a linguagem Python com as seguintes operações:
     a. Verificar se um número pertence lista;
     b. Inserir um novo elemento na lista;
     c. Remover um elemento da lista;
