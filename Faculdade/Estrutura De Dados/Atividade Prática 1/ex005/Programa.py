@@ -9,7 +9,7 @@ tarefas:
     e. Listar as características do primeiro avião da fila.
 """
 import numpy as np
-from time import sleep
+
 
 class Fila:
     def __init__(self, capacidade):
@@ -36,11 +36,11 @@ class Fila:
         if self.filaVazia():
             print('A fila já está vazia')
         else:
-            for x in range(fila.numeroElementos - 1):
-                temp = fila.valores[x + 1]
-                fila.valores[x + 1] = None
-                fila.valores[x] = temp
-            fila.numeroElementos -= 1
+            for x in range(self.numeroElementos - 1):
+                temp = self.valores[x + 1]
+                self.valores[x + 1] = None
+                self.valores[x] = temp
+            self.numeroElementos -= 1
 
     def primeiro(self):
         if self.filaVazia():
@@ -59,6 +59,7 @@ def comandoInvalido():
     print("\033[1;31mOpção inválida. Tente novamente!\033[m")
 
 
+print("* FILA *")
 # DEFININDO TAMANHO DA FILA
 while True:
     try:
@@ -75,7 +76,6 @@ while True:
     while True:
         try:
             linha()
-            sleep(1)
             print("* MENU DE OPERAÇÕES *")
             print("1 - Listar o número de aviões aguardando na fila de decolagem;")
             print("2 - Autorizar a decolagem do primeiro avião da fila;")

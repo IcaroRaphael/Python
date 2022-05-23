@@ -23,30 +23,37 @@ class FilaCircular:
         self.valores = np.empty(self.capacidade, dtype=int)
 
     def filaVazia(self):
-        return self.numeroElementos == 0
+        if self.numeroElementos == 0:
+            return True
+        else:
+            return False
 
     def filaCheia(self):
-        return self.numeroElementos == self.capacidade - 1
+        if self.numeroElementos == self.capacidade - 1:
+            return True
+        else:
+            return False
 
     def enfileirar(self, valor):
         if self.filaCheia():
             print('A fila está cheia')
-        if self.fim == self.capacidade - 1:
-            self.fim = -1
-        self.fim += 1
-        self.valores[self.fim] = valor
-        self.numeroElementos += 1
+        else:
+            if self.fim == self.capacidade - 1:
+                self.fim = -1
+            self.fim += 1
+            self.valores[self.fim] = valor
+            self.numeroElementos += 1
 
         def desenfileirar(self):
             if self.filaVazia():
                 print('A fila está vazia')
-                return
-        temp = self.valores[self.inicio]
-        self.inicio += 1
-        if self.inicio == self.capacidade - 1:
-            self.inicio = 0
-            self.numeroElemento = - 1
-            return temp
+            else:
+                temp = self.valores[self.inicio]
+                self.inicio += 1
+                if self.inicio == self.capacidade - 1:
+                    self.inicio = 0
+                    self.numeroElemento -= 1
+                    return temp
 
         def primeiro(self):
             if self.filaVazia():
@@ -55,25 +62,50 @@ class FilaCircular:
                 return self.valores[self.inicio]
 
 
+# FUNÇÃO LINHA
+def linha():
+    print("\033[1;34m-=-\033[m"*20)
+
+
+# FUNÇÃO MENSAGEM DE INVALIDEZ
+def comandoInvalido():
+    print("\033[1;31mOpção inválida. Tente novamente!\033[m")
+
+
+print("* FILA CIRCULAR *")
 # INSERINDO SOLDADOS NA FILA CIRCULAR
-quant = int(input("Quantidade total de soldados: "))
+while True:
+    try:
+        linha()
+        quant = int(input("Quantidade total de soldados: "))
+        break
+    except:
+        comandoInvalido()
 fila = FilaCircular(quant)
-for s in range(quant):
-    soldado = int(input(f"Nº de identificação do {s+1}º soldado: "))
-    fila.enfileirar(soldado)
-print("-=-"*15)
+if quant > 0:
+    for s in range(quant):
+        while True:
+            try:
+                soldado = int(input(f"Nº de identificação do {s+1}º soldado: "))
+                break
+            except:
+                comandoInvalido()
+        fila.enfileirar(soldado)
+    linha()
 
-# SORTEANDO SOLDADO
-soldadoEscolhido = 0
-for x in range(len(fila.valores)-1):
-    while(True):
-        aleatorio = randint(0, len(fila.valores)-1)
-        if fila.valores[aleatorio] != 0:
-            fila.valores[aleatorio] = 0
-            break
-for s in range(len(fila.valores)):
-    if fila.valores[s] != 0:
-        soldadoEscolhido = fila.valores[s]
+    # SORTEANDO SOLDADO
+    soldadoEscolhido = 0
+    for x in range(len(fila.valores)-1):
+        while True:
+            aleatorio = randint(0, len(fila.valores)-1)
+            if fila.valores[aleatorio] != 0:
+                fila.valores[aleatorio] = 0
+                break
+    for s in range(len(fila.valores)):
+        if fila.valores[s] != 0:
+            soldadoEscolhido = fila.valores[s]
 
-# MOSTRANDO SOLDADO ESCOLHIDO
-print(f"Nº Identificação do soldado escolhido: {soldadoEscolhido}")
+    # MOSTRANDO SOLDADO ESCOLHIDO
+    print(f"Nº Identificação do soldado escolhido: {soldadoEscolhido}")
+else:
+    print("A fila está vazia!")

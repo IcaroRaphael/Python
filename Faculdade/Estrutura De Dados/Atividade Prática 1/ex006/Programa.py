@@ -5,7 +5,6 @@
     c. Remover um elemento da lista;
     d. Imprimir os valores da lista;
 """
-from time import sleep
 import numpy as np
 
 
@@ -74,6 +73,7 @@ def comandoInvalido():
     print("\033[1;31mOpção inválida. Tente novamente!\033[m")
 
 
+print("* LISTA SEQUENCIAL *")
 # DEFININDO TAMANHO DA LISTA
 while True:
     try:
@@ -89,7 +89,6 @@ while True:
     while True:
         try:
             linha()
-            sleep(1)
             print("* MENU DE OPERAÇÕES *")
             print("1 - Verificar se um número pertence lista;")
             print("2 - Inserir um novo elemento na lista;")
