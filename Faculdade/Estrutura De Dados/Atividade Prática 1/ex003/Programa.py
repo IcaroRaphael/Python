@@ -9,57 +9,49 @@ parou é removido do círculo, um novo número é sorteado e a contagem recomeç
 soldado seguinte ao que foi eliminado. A cada rodada, portanto, o círculo diminui em um,
 até que somente um soldado reste e seja escolhido para a tarefa.
 """
+
 import numpy as np
 from random import randint
 
-
 class FilaCircular:
-
     def __init__(self, capacidade):
         self.capacidade = capacidade
         self.inicio = 0
-        self.fim = -1
+        self.final = -1
         self.numeroElementos = 0
         self.valores = np.empty(self.capacidade, dtype=int)
-
+    
     def filaVazia(self):
-        if self.numeroElementos == 0:
-            return True
-        else:
-            return False
-
+        return self.numeroElementos == 0
+    
     def filaCheia(self):
-        if self.numeroElementos == self.capacidade - 1:
-            return True
-        else:
-            return False
-
+        return self.numeroElementos == self.capacidade
+    
     def enfileirar(self, valor):
         if self.filaCheia():
-            print('A fila está cheia')
-        else:
-            if self.fim == self.capacidade - 1:
-                self.fim = -1
-            self.fim += 1
-            self.valores[self.fim] = valor
-            self.numeroElementos += 1
+            print("A Fila está Cheia")
+            return
+        if self.final == self.capacidade - 1:
+            self.final = -1
+        self.final += 1
+        self.valores[self.final] = valor
+        self.numeroElementos += 1
 
-        def desenfileirar(self):
-            if self.filaVazia():
-                print('A fila está vazia')
-            else:
-                temp = self.valores[self.inicio]
-                self.inicio += 1
-                if self.inicio == self.capacidade - 1:
-                    self.inicio = 0
-                    self.numeroElemento -= 1
-                    return temp
-
-        def primeiro(self):
-            if self.filaVazia():
-                return -1
-            else:
-                return self.valores[self.inicio]
+    def desenfileirar(self):
+        if self.filaVazia():
+            print("A Fila está Vazia")
+            return
+        temp = self.valores[self.inicio]
+        self.inicio += 1
+        if self.inicio == self.capacidade:
+            self.inicio = 0
+        self.numeroElementos -= 1
+        return temp
+    
+    def primeiro(self):
+        if self.filaVazia():
+            return -1
+        return self.valores[self.inicio]
 
 
 # FUNÇÃO LINHA
@@ -73,39 +65,38 @@ def comandoInvalido():
 
 
 print("* FILA CIRCULAR *")
-# INSERINDO SOLDADOS NA FILA CIRCULAR
+# DEFININDO TAMANHO DA FILA
 while True:
+    linha()
     try:
-        linha()
-        quant = int(input("Quantidade total de soldados: "))
+        quant = int(input("Insira a quantidade de soldados: "))
         break
     except:
         comandoInvalido()
 fila = FilaCircular(quant)
-if quant > 0:
-    for s in range(quant):
-        while True:
-            try:
-                soldado = int(input(f"Nº de identificação do {s+1}º soldado: "))
-                break
-            except:
-                comandoInvalido()
-        fila.enfileirar(soldado)
-    linha()
 
-    # SORTEANDO SOLDADO
-    soldadoEscolhido = 0
-    for x in range(len(fila.valores)-1):
-        while True:
-            aleatorio = randint(0, len(fila.valores)-1)
-            if fila.valores[aleatorio] != 0:
-                fila.valores[aleatorio] = 0
-                break
-    for s in range(len(fila.valores)):
-        if fila.valores[s] != 0:
-            soldadoEscolhido = fila.valores[s]
+# ATRIBUINDO IDENTIFICAÇÃO AOS SOLDADOS
+linha()
+for i in range(quant):
+    while True:
+        try:
+            soldado = int(input(f"Nº de identificação do {i+1}º soldado: "))
+            break
+        except:
+            comandoInvalido()
+    fila.enfileirar(soldado)
 
-    # MOSTRANDO SOLDADO ESCOLHIDO
-    print(f"Nº Identificação do soldado escolhido: {soldadoEscolhido}")
-else:
-    print("A fila está vazia!")
+# SORTEANDO SOLDADO
+for i in range(fila.numeroElementos - 1):
+    for j in range(randint(1, 10)):
+        fila.inicio += 1
+        if fila.inicio == fila.capacidade:
+            fila.inicio = 0
+        if fila.final == fila.capacidade - 1:
+            fila.final = -1
+        fila.final += 1
+    fila.desenfileirar()
+
+linha()
+print(f'Soldado escolhido: {fila.primeiro()}')
+linha()
