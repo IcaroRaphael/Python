@@ -87,6 +87,13 @@ for i in range(quant):
     fila.enfileirar(soldado)
 
 # SORTEANDO SOLDADO
+for j in range(randint(1, 10)):
+    fila.inicio += 1
+    if fila.inicio == fila.capacidade:
+        fila.inicio = 0
+    if fila.final == fila.capacidade - 1:
+        fila.final = -1
+    fila.final += 1
 for i in range(fila.numeroElementos - 1):
     for j in range(randint(1, 10)):
         fila.inicio += 1
